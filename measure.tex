@@ -1,9 +1,10 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsfonts,amsmath,amssymb,amsthm,mathtools}
-\newtheorem{definition}{Definition}[subsection]
-\newtheorem{proposition}{Proposition}[subsection]
-\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}{Remark}[section]
 
 
 
@@ -71,6 +72,7 @@
 
 \section{Outer Measure}
 \begin{definition}
+	\label{outer measure}
 	Let $X$ be an arbitrary set. A function $\mu^*: \mathcal{P}(X) \to [0, \infty]$ is called an \underline{outer measure} if it satisfies the following three conditions:
 	\begin{enumerate}
 		\item $\mu^*(\emptyset) = 0$
@@ -90,9 +92,11 @@
 \end{definition}
 
 \begin{definition}
-	For each subset $A$ of $\mathbb{R}^d$, let be the set of all infinite sequences of bounded, open intervals of the form $(a_1, b_1) \times \cdots \times (a_d, b_d)$ such that $A \subseteq \bigcup_{i=1}^\infty (a_1, b_1) \times \cdots \times (a_d, b_d)$. We
-	define the \underline{Lebesgue outer measure} $\lambda^*:\mathcal{P}(\mathbb{R}^d) \to [0, \infty]$ by
-	$$ A \mapsto \inf\left\{\sum_{i=1}^\infty \prod_{j=1}^d (b_{ij} - a_{ij}): (a_{ij}, b_{ij})_{i,j \in \mathbb{N}} \in \mathcal{I}_A\right\}$$
+	For each subset $A$ of $\mathbb{R}$, let $\mathcal{C}_A$ be the set of all infinite sequences $\left\{\left(a_i, b_i\right)\right\}$ of bounded open intervals such that $A \subseteq \cup_i\left(a_i, b_i\right)$.
+	We define the \underline{Lebesgue outer measure} $\lambda^*: \mathcal{P}(\mathbb{R}) \rightarrow$ $[0,+\infty]$ is defined by
+	$$
+	\lambda^*(A)=\inf \left\{\sum_i\left(b_i-a_i\right):\left\{\left(a_i, b_i\right)\right\} \in \mathcal{C}_A\right\} .
+	$$
 \end{definition}
 
 \begin{proposition}
@@ -114,7 +118,7 @@
 \end{definition}
 
 \begin{definition}
-	A finite or $\sigma$-finite measure $\mu$ on a $\sigma$-algebra $\mathcal{A}$ is \underline{discrete} if there is a countable subset $D$ of $X$ such that $\mu(D^\mathsf{c}) = 0$.
+	A finite or $\sigma$-finite measure $\mu$ on a $\sigma$-algebra $\mathcal{A}$ is \underline{dicalete} if there is a countable subset $D$ of $X$ such that $\mu(D^\mathsf{c}) = 0$.
 \end{definition}
 
 \begin{definition}
@@ -159,5 +163,55 @@
 \begin{proposition}
 	if $\mu^*$ is is an outer measure on the set $X$ and if $\mathcal{M}_{\mu^*}$ is the $\sigma$-algebra of all $\mu^*$-measurable subsets of $X$, then the restriction of $\mu^*$ to $\mathcal{M}_{\mu^*}$ is complete.
 \end{proposition}
+\begin{remark}
+	There are Lebesgue measurable subsets of $\mathbb{R}$ that are not Borel.
+\end{remark}
+\begin{remark}
+	The restriction of Lebesgue measure to $\mathcal{B}(\mathbb{R})$ is not complete.
+\end{remark}
+\begin{definition}
+	\label{subset outer measure}
+	Let $(X, \mathcal{A}, \mu)$ be a measure space. For an arbitrary subset $A$ of $X$, we define the \underline{outer measure} of $A$ by
+	$$\mu^*(A) \vcentcolon= \inf\left\{\sum_{i=1}^\infty \mu(A_i): A \subseteq \bigcup_{i=1}^\infty A_i, A_i \in \mathcal{A}\right\}$$ and the \underline{inner measure} by
+	$$\mu_*(A) \vcentcolon= \sup\left\{\mu(B): B \subseteq A, B \in \mathcal{A}\right\}.$$
+\end{definition}
+
+\begin{proposition}
+	The outer measure defined in \ref{subset outer measure} is an outer measure in the sense of \ref{outer measure}.
+\end{proposition}
+
+\begin{proposition}
+	Let $(X, \mathcal{A}, \mu)$ be a measure space. Let $A$ be a subset of $X$ such that $\mu^*(A) < \infty$. Then $A$ is $\mu^*$-measurable if and only if
+	$$\mu^*(A) = \mu_*(A).$$
+\end{proposition}
+\begin{definition}
+	Let $\mathcal{A}$ be a $\sigma$-algebra on $\mathbb{R}^d$ that includes the $\sigma$-algebra $\mathcal{B}\left(\mathbb{R}^d\right)$ of Borel sets. A measure $\mu$ on $\left(\mathbb{R}^d, \mathcal{A}\right)$ is \underline{regualr} if
+	\begin{enumerate}
+		\item each compact subset $K$ of $\mathbb{R}^d$ satisfies $\mu(K)<+\infty$
+		\item each set $A$ in $\mathcal{A}$ satisfies
+		      $$
+		      \mu(A)=\inf \{\mu(U): U \text { is open and } A \subseteq U\}$$
+		\item each open subset $U$ of $\mathbb{R}^d$ satisfies
+		      $$
+		      \mu(U)=\sup \{\mu(K): K \text { is compact and } K \subseteq U\}
+		      $$
+		      
+	\end{enumerate}
+	
+	\begin{proposition}
+		Let $\mu$ be a finite measure on $\left(\mathbb{R}^d, \mathcal{B}\left(\mathbb{R}^d\right)\right)$. Then $\mu$ is regular, and, moreover, each Borel subset $A$ of $\mathbb{R}^d$ satisfies
+		$$
+		\mu(A)=\sup \{\mu(K): K \subseteq A \text { and } K \text { is \textbf{compact}}\} .
+		$$
+	\end{proposition}
+	
+	
+\end{definition}
+
+
+
+
+
+
 
 \end{document}
